@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5ef">
+  <title>Get in touch</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #183b35;
+      --muted: #60736d;
+      --paper: #f3f5ef;
+      --line: #d9e0d7;
+      --accent: #d9f36a;
+      --focus: #237565;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 88% 12%, rgba(217, 243, 106, .28), transparent 28rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(100% - 40px, 760px);
+      margin: 0 auto;
+      padding: clamp(48px, 9vh, 88px) 0 64px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--focus);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 620px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 8vw, 72px);
+      font-weight: 400;
+      line-height: 1.02;
+    }
+
+    .intro {
+      max-width: 510px;
+      margin: 20px 0 38px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 20px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .field { display: grid; gap: 9px; }
+    .field-wide { grid-column: 1 / -1; }
+
+    label {
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 50px;
+      padding: 13px 14px;
+      border: 1px solid #cbd5cc;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, .72);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--focus);
+      outline: 3px solid rgba(35, 117, 101, .18);
+      outline-offset: 1px;
+    }
+
+    .form-footer {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 2px;
+    }
+
+    button {
+      min-height: 50px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 4px;
+      background: var(--ink);
+      color: #fff;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background-color 160ms ease, transform 160ms ease;
+    }
+
+    button:hover { background: #28584f; transform: translateY(-1px); }
+    button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    #form-status {
+      min-height: 1.5em;
+      margin: 0;
+      color: var(--focus);
+      font-size: 14px;
+    }
+
+    @media (max-width: 560px) {
+      main { width: min(100% - 32px, 760px); }
+      form { grid-template-columns: 1fr; gap: 18px; }
+      .field-wide, .form-footer { grid-column: auto; }
+      .form-footer { align-items: flex-start; flex-direction: column; gap: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Contact</p>
+    <h1>Let’s start a conversation.</h1>
+    <p class="intro">Have a question or an idea to share? Send a note and we’ll be in touch.</p>
+
+    <form id="contact-form">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" name="name" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field field-wide">
+        <label for="subject">What’s this about?</label>
+        <select id="subject" name="subject" required>
+          <option value="" selected disabled>Select a topic</option>
+          <option value="question">A general question</option>
+          <option value="project">A project idea</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+      <div class="field field-wide">
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <div class="form-footer">
+        <button type="submit">Send message</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </main>
+  <script>
+    document.querySelector("#contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.querySelector("#form-status").textContent = "Thanks for reaching out. Your message is ready to send.";
+      event.currentTarget.reset();
+    });
+  </script>
+</body>
+</html>
